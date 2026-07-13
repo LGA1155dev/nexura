@@ -1,6 +1,9 @@
 {
   "name": "nexuradesk",
   "version": "1.0.0",
+  "engines": {
+  "node": "20.x"
+  },
   "description": "Nexura Desk - Help Desk & IT Service Management",
   "main": "server.js",
   "scripts": {
