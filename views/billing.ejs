@@ -1,0 +1,32 @@
+<%- include('partials/app-header', {active: 'billing'}) %>
+
+<% if (message) { %><div class="success-banner"><%= message %></div><% } %>
+
+<div class="section-title" style="margin-top:0;">Planos disponíveis</div>
+<div class="plan-grid" style="margin-bottom:24px;">
+  <% Object.keys(plans).forEach(function(key) { %>
+    <div class="card plan-card <%= user.plan === key ? 'current' : '' %>">
+      <div style="font-weight:600;"><%= plans[key].label %></div>
+      <div class="price">R$<%= plans[key].price %><span style="font-size:12px; color:#5B6472; font-weight:400;">/mês</span></div>
+      <form method="POST" action="/billing/upgrade">
+        <input type="hidden" name="plan" value="<%= key %>">
+        <button class="btn <%= user.plan === key ? 'btn-ghost' : 'btn-accent' %> btn-block" type="submit" <%= user.plan === key ? 'disabled' : '' %>>
+          <%= user.plan === key ? 'Plano atual' : 'Selecionar' %>
+        </button>
+      </form>
+    </div>
+  <% }) %>
+</div>
+
+<div class="section-title">Cupom de desconto</div>
+<div class="card card-pad" style="max-width:420px;">
+  <form method="POST" action="/billing/coupon">
+    <div class="field">
+      <label>Código do cupom</label>
+      <input type="text" name="code" placeholder="Ex: WELCOME10" required>
+    </div>
+    <button class="btn btn-accent" type="submit">Aplicar cupom</button>
+  </form>
+</div>
+
+<%- include('partials/app-footer') %>

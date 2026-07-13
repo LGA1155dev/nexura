@@ -1,0 +1,30 @@
+<%- include('partials/app-header', {active: 'admin-users'}) %>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Papel</th>
+        <th>Plano</th>
+        <th>Departamento</th>
+        <th>Desde</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(u) { %>
+        <tr onclick="window.location='/admin/users/<%= u.id %>'" style="cursor:pointer;">
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td><span class="badge badge-open"><%= u.role %></span></td>
+          <td><%= u.plan %></td>
+          <td><%= u.department %></td>
+          <td class="mono" style="font-size:12px; color:#5B6472;"><%= u.created_at %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/app-footer') %>

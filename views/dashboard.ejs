@@ -1,0 +1,46 @@
+<%- include('partials/app-header', {active: 'dashboard'}) %>
+
+<div class="stat-grid">
+  <div class="card stat-card">
+    <div class="stat-num"><%= openCount %></div>
+    <div class="stat-label">Chamados em aberto</div>
+  </div>
+  <div class="card stat-card">
+    <div class="stat-num"><%= totalCount %></div>
+    <div class="stat-label">Total de chamados</div>
+  </div>
+  <div class="card stat-card">
+    <div class="stat-num"><%= currentUser.plan %></div>
+    <div class="stat-label">Plano atual</div>
+  </div>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Assunto</th>
+        <th>Categoria</th>
+        <th>Prioridade</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (recent.length === 0) { %>
+        <tr><td colspan="5" style="text-align:center; color:#5B6472; padding:30px;">Nenhum chamado ainda. <a href="/tickets/new">Abrir o primeiro chamado</a>.</td></tr>
+      <% } %>
+      <% recent.forEach(function(t) { %>
+        <tr onclick="window.location='/tickets/<%= t.id %>'" style="cursor:pointer;">
+          <td class="ticket-id">NXD-<%= String(t.id).padStart(5,'0') %></td>
+          <td><%= t.subject %></td>
+          <td><%= t.category %></td>
+          <td><span class="badge badge-<%= t.priority %>"><%= t.priority %></span></td>
+          <td><span class="badge badge-<%= t.status %>"><%= t.status.replace('_',' ') %></span></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/app-footer') %>

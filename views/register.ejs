@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-brand"><span class="mark">ND</span><span>Nexura Desk</span></div>
+    <h1>Criar sua conta</h1>
+    <p class="auth-sub">Comece a usar o Nexura Desk gratuitamente.</p>
+
+    <% if (error) { %><div class="error-banner"><%= error %></div><% } %>
+
+    <form method="POST" action="/register">
+      <div class="field">
+        <label>Nome completo</label>
+        <input type="text" name="name" required autofocus>
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="field">
+        <label>Departamento</label>
+        <select name="department">
+          <option>General</option>
+          <option>Finance</option>
+          <option>Marketing</option>
+          <option>Sales</option>
+          <option>Engineering</option>
+          <option>Human Resources</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Senha</label>
+        <input type="password" name="password" required minlength="8">
+      </div>
+      <button class="btn btn-accent btn-block" type="submit">Criar conta</button>
+    </form>
+
+    <p class="auth-foot">Já tem uma conta? <a href="/login">Entrar</a></p>
+  </div>
+</div>
+</body>
+</html>

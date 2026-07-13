@@ -1,0 +1,55 @@
+<%- include('partials/app-header', {active: 'tickets'}) %>
+
+<div class="toolbar">
+  <form method="GET" action="/tickets" style="display:flex; gap:10px; flex-wrap:wrap; flex:1;">
+    <input type="text" name="search" placeholder="Buscar por assunto ou descrição" value="<%= filters.search %>" style="min-width:220px;">
+    <select name="category">
+      <option value="">Todas as categorias</option>
+      <% ['access','hardware','software','network','general'].forEach(function(c){ %>
+        <option value="<%= c %>" <%= filters.category === c ? 'selected' : '' %>><%= c %></option>
+      <% }) %>
+    </select>
+    <select name="status">
+      <option value="">Todos os status</option>
+      <% ['open','in_progress','closed'].forEach(function(s){ %>
+        <option value="<%= s %>" <%= filters.status === s ? 'selected' : '' %>><%= s.replace('_',' ') %></option>
+      <% }) %>
+    </select>
+    <button class="btn btn-ghost" type="submit">Filtrar</button>
+  </form>
+  <a class="btn btn-accent" href="/tickets/new">Novo chamado</a>
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th><a href="/tickets?sort=subject&order=<%= filters.order === 'ASC' ? 'desc' : 'asc' %>">Assunto</a></th>
+        <% if (isStaff) { %><th>Solicitante</th><% } %>
+        <th><a href="/tickets?sort=category&order=<%= filters.order === 'ASC' ? 'desc' : 'asc' %>">Categoria</a></th>
+        <th><a href="/tickets?sort=priority&order=<%= filters.order === 'ASC' ? 'desc' : 'asc' %>">Prioridade</a></th>
+        <th><a href="/tickets?sort=status&order=<%= filters.order === 'ASC' ? 'desc' : 'asc' %>">Status</a></th>
+        <th><a href="/tickets?sort=created_at&order=<%= filters.order === 'ASC' ? 'desc' : 'asc' %>">Criado em</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (tickets.length === 0) { %>
+        <tr><td colspan="7" style="text-align:center; color:#5B6472; padding:30px;">Nenhum chamado encontrado com esses filtros.</td></tr>
+      <% } %>
+      <% tickets.forEach(function(t) { %>
+        <tr onclick="window.location='/tickets/<%= t.id %>'" style="cursor:pointer;">
+          <td class="ticket-id">NXD-<%= String(t.id).padStart(5,'0') %></td>
+          <td><%= t.subject %></td>
+          <% if (typeof isStaff !== 'undefined' && isStaff) { %><td><%= t.owner_name %></td><% } %>
+          <td><%= t.category %></td>
+          <td><span class="badge badge-<%= t.priority %>"><%= t.priority %></span></td>
+          <td><span class="badge badge-<%= t.status %>"><%= t.status.replace('_',' ') %></span></td>
+          <td class="mono" style="font-size:12px; color:#5B6472;"><%= t.created_at %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/app-footer') %>

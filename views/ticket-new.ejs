@@ -1,0 +1,38 @@
+<%- include('partials/app-header', {active: 'tickets'}) %>
+
+<div class="card card-pad" style="max-width:640px;">
+  <% if (error) { %><div class="error-banner"><%= error %></div><% } %>
+  <form method="POST" action="/tickets/new">
+    <div class="field">
+      <label>Assunto</label>
+      <input type="text" name="subject" required autofocus>
+    </div>
+    <div class="form-row">
+      <div class="field">
+        <label>Categoria</label>
+        <select name="category">
+          <option value="general">Geral</option>
+          <option value="access">Acesso</option>
+          <option value="hardware">Hardware</option>
+          <option value="software">Software</option>
+          <option value="network">Rede</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Prioridade</label>
+        <select name="priority">
+          <option value="low">Baixa</option>
+          <option value="normal" selected>Normal</option>
+          <option value="high">Alta</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Descrição</label>
+      <textarea name="description" rows="6" required></textarea>
+    </div>
+    <button class="btn btn-accent" type="submit">Abrir chamado</button>
+  </form>
+</div>
+
+<%- include('partials/app-footer') %>

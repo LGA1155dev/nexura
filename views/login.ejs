@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-brand"><span class="mark">ND</span><span>Nexura Desk</span></div>
+    <h1>Entrar na sua conta</h1>
+    <p class="auth-sub">Acesse o painel de suporte da sua empresa.</p>
+
+    <% if (error) { %><div class="error-banner"><%= error %></div><% } %>
+
+    <form method="POST" action="/login">
+      <div class="field">
+        <label>E-mail corporativo</label>
+        <input type="email" name="email" required autofocus>
+      </div>
+      <div class="field">
+        <label>Senha</label>
+        <input type="password" name="password" required>
+      </div>
+      <button class="btn btn-accent btn-block" type="submit">Entrar</button>
+    </form>
+
+    <p class="auth-foot">
+      <a href="/forgot-password">Esqueci minha senha</a> &nbsp;·&nbsp;
+      <a href="/register">Criar conta</a>
+    </p>
+  </div>
+</div>
+</body>
+</html>

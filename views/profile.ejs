@@ -1,0 +1,40 @@
+<%- include('partials/app-header', {active: 'profile'}) %>
+
+<% if (saved) { %><div class="success-banner">Alterações salvas com sucesso.</div><% } %>
+<% if (error) { %><div class="error-banner"><%= error %></div><% } %>
+
+<div class="card card-pad" style="max-width:520px; margin-bottom:18px;">
+  <div class="section-title" style="margin-top:0;">Dados da conta</div>
+  <form method="POST" action="/profile">
+    <div class="field">
+      <label>Nome</label>
+      <input type="text" name="name" value="<%= user.name %>" required>
+    </div>
+    <div class="field">
+      <label>E-mail</label>
+      <input type="email" name="email" value="<%= user.email %>" required>
+    </div>
+    <div class="field">
+      <label>Departamento</label>
+      <input type="text" name="department" value="<%= user.department %>">
+    </div>
+    <button class="btn btn-accent" type="submit">Salvar alterações</button>
+  </form>
+</div>
+
+<div class="card card-pad" style="max-width:520px;">
+  <div class="section-title" style="margin-top:0;">Alterar senha</div>
+  <form method="POST" action="/profile/password">
+    <div class="field">
+      <label>Senha atual</label>
+      <input type="password" name="currentPassword" required>
+    </div>
+    <div class="field">
+      <label>Nova senha</label>
+      <input type="password" name="newPassword" required minlength="8">
+    </div>
+    <button class="btn btn-ghost" type="submit">Atualizar senha</button>
+  </form>
+</div>
+
+<%- include('partials/app-footer') %>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-brand"><span class="mark">ND</span><span>Nexura Desk</span></div>
+    <h1><%= title %></h1>
+    <p class="auth-sub"><%= message %></p>
+    <% if (typeof stack !== 'undefined' && stack) { %>
+      <pre style="white-space:pre-wrap; font-size:11px; background:#F5F6F7; padding:12px; border-radius:6px; color:#5B6472; max-height:260px; overflow:auto;"><%= stack %></pre>
+    <% } %>
+    <p class="auth-foot"><a href="/dashboard">Voltar ao painel</a></p>
+  </div>
+</div>
+</body>
+</html>

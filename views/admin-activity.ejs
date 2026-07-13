@@ -1,0 +1,28 @@
+<%- include('partials/app-header', {active: 'activity'}) %>
+
+<p style="color:#5B6472; font-size:13px; margin-top:0;">Últimos comentários registrados em todos os chamados, para acompanhamento rápido da equipe.</p>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Chamado</th>
+        <th>Autor</th>
+        <th>Comentário</th>
+        <th>Quando</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% recentComments.forEach(function(c) { %>
+        <tr>
+          <td><a href="/tickets/<%= c.ticket_id %>"><%= c.ticket_subject %></a></td>
+          <td><%= c.author_name %></td>
+          <td><%- c.body %></td>
+          <td class="mono" style="font-size:12px; color:#5B6472;"><%= c.created_at %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/app-footer') %>

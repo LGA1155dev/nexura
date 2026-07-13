@@ -1,0 +1,22 @@
+<%- include('partials/app-header', {active: 'admin'}) %>
+
+<div class="stat-grid">
+  <div class="card stat-card">
+    <div class="stat-num"><%= userCount %></div>
+    <div class="stat-label">Usuários cadastrados</div>
+  </div>
+  <div class="card stat-card">
+    <div class="stat-num"><%= ticketCount %></div>
+    <div class="stat-label">Chamados totais</div>
+  </div>
+  <div class="card stat-card">
+    <div class="stat-num"><%= openTickets %></div>
+    <div class="stat-label">Chamados em aberto</div>
+  </div>
+</div>
+
+<div class="card card-pad">
+  <p style="color:#5B6472; font-size:13.5px; margin:0;">Use o menu lateral para gerenciar usuários e acompanhar a atividade recente do suporte.</p>
+</div>
+
+<%- include('partials/app-footer') %>
